@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 from app.database import engine, Base
-from app.models import User, Project, TestCase, Defect
-from app.routers import auth, projects, testcases
+from app.models import User, Project, TestCase, Defect, Execution
+from app.routers import auth, projects, testcases, defects, executions
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -20,6 +20,8 @@ security = HTTPBearer()
 app.include_router(auth.router)
 app.include_router(projects.router)
 app.include_router(testcases.router)
+app.include_router(defects.router)
+app.include_router(executions.router)
 
 @app.get("/")
 def root():
