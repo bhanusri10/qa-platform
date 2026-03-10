@@ -13,3 +13,4 @@ class Project(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     owner = relationship("User")
+    test_cycles = relationship("TestCycle", back_populates="project")
