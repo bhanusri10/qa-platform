@@ -6,6 +6,7 @@ class DefectCreate(BaseModel):
     title: str
     description: Optional[str] = None
     severity: Optional[str] = "medium"
+    status: Optional[str] = "open"
     test_case_id: Optional[int] = None
     assigned_to: Optional[int] = None
 
