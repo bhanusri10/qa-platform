@@ -3,7 +3,7 @@ from fastapi.security import HTTPBearer
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.models import User, Project, TestCase, Defect, Execution, TestCycle
-from app.routers import auth, projects, testcases, defects, executions
+from app.routers import auth, projects, testcases, defects, executions, ai
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -15,7 +15,7 @@ app = FastAPI(
     swagger_ui_parameters={"persistAuthorization": True}
 )
 
-# CORS — allow React frontend to talk to backend
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
@@ -32,6 +32,7 @@ app.include_router(projects.router)
 app.include_router(testcases.router)
 app.include_router(defects.router)
 app.include_router(executions.router)
+app.include_router(ai.router)
 
 @app.get("/")
 def root():
